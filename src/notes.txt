@@ -1,0 +1,116 @@
+Voici comment adapter le code pour envoyer un e-mail avec SendGrid dans un projet NestJS. Vous pouvez créer un service dédié pour gérer l'envoi d'e-mails.
+
+Étape 1 : Installer le package SendGrid
+Assurez-vous d'installer le package @sendgrid/mail :
+
+bash
+Copier le code
+npm install @sendgrid/mail
+Étape 2 : Créer un module et un service pour gérer les e-mails
+1. Créer un module EmailModule
+bash
+Copier le code
+nest generate module email
+2. Créer un service EmailService
+bash
+Copier le code
+nest generate service email
+
+
+3. Mettre en œuvre le service EmailService
+Voici un exemple de code pour le service :
+
+typescript
+Copier le code
+// src/email/email.service.ts
+import { Injectable, Logger } from '@nestjs/common';
+import * as sgMail from '@sendgrid/mail';
+
+@Injectable()
+export class EmailService {
+  private readonly logger = new Logger(EmailService.name);
+
+  constructor() {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  }
+
+  async sendEmail(to: string, subject: string, text: string, html: string): Promise<void> {
+    const msg = {
+      to,
+      from: process.env.SENDGRID_VERIFIED_SENDER, // Utilisez un expéditeur vérifié
+      subject,
+      text,
+      html,
+    };
+
+    try {
+      await sgMail.send(msg);
+      this.logger.log(`Email sent to ${to}`);
+    } catch (error) {
+      this.logger.error(`Failed to send email to ${to}`, error.stack);
+      throw error;
+    }
+  }
+}
+4. Configurer le module EmailModule
+Dans le fichier email.module.ts :
+
+typescript
+Copier le code
+// src/email/email.module.ts
+import { Module } from '@nestjs/common';
+import { EmailService } from './email.service';
+
+@Module({
+  providers: [EmailService],
+  exports: [EmailService], // Permet d'utiliser ce service dans d'autres modules
+})
+export class EmailModule {}
+Étape 3 : Utiliser le service dans un autre module
+Dans un module (par exemple UserModule), injectez et utilisez le service EmailService :
+
+Exemple d'utilisation :
+typescript
+Copier le code
+// src/user/user.service.ts
+import { Injectable } from '@nestjs/common';
+import { EmailService } from '../email/email.service';
+
+@Injectable()
+export class UserService {
+  constructor(private readonly emailService: EmailService) {}
+
+  async sendWelcomeEmail(userEmail: string): Promise<void> {
+    const subject = 'Welcome to our platform!';
+    const text = 'Thank you for joining us.';
+    const html = '<strong>Thank you for joining us.</strong>';
+    
+    await this.emailService.sendEmail(userEmail, subject, text, html);
+  }
+}
+Étape 4 : Ajouter la configuration dans le fichier .env
+Ajoutez les variables nécessaires dans votre fichier .env :
+
+env
+Copier le code
+SENDGRID_API_KEY=your-sendgrid-api-key
+SENDGRID_VERIFIED_SENDER=your-verified-sender@example.com
+Étape 5 : Tester l'envoi d'e-mails
+Appelez la méthode sendWelcomeEmail dans votre contrôleur ou autre logique métier.
+
+typescript
+Copier le code
+// src/user/user.controller.ts
+import { Controller, Post, Body } from '@nestjs/common';
+import { UserService } from './user.service';
+
+@Controller('user')
+export class UserController {
+  constructor(private readonly userService: UserService) {}
+
+  @Post('welcome')
+  async sendWelcomeEmail(@Body('email') email: string): Promise<void> {
+    await this.userService.sendWelcomeEmail(email);
+  }
+}
+C'est tout ! Vous avez maintenant un service SendGrid fonctionnel dans votre application NestJS.

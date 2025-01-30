@@ -1,0 +1,49 @@
+-------------------------------|---------|----------|---------|---------|-------------------
+File                           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------------------|---------|----------|---------|---------|-------------------
+All files                      |    7.46 |        0 |    6.06 |    6.35 |                   
+ src                           |    31.7 |        0 |      75 |   25.71 |                   
+  app.controller.ts            |     100 |      100 |     100 |     100 |                   
+  app.module.ts                |       0 |        0 |     100 |       0 | 1-41              
+  app.service.ts               |     100 |      100 |     100 |     100 |                   
+  main.ts                      |       0 |      100 |       0 |       0 | 1-16              
+ src/DTOs                      |       0 |      100 |     100 |       0 |                   
+  admin.dto.ts                 |       0 |      100 |     100 |       0 | 1                 
+  compte_mtn.dto.ts            |       0 |      100 |     100 |       0 | 1                 
+  compte_uatm.dto.ts           |       0 |      100 |     100 |       0 | 1                 
+ src/email                     |    40.9 |      100 |      50 |   38.88 |                   
+  email.module.ts              |       0 |      100 |     100 |       0 | 1-8               
+  email.service.ts             |   52.94 |      100 |      50 |   46.66 | 15-37             
+ src/entities                  |       0 |      100 |       0 |       0 |                   
+  admin.entity.ts              |       0 |      100 |     100 |       0 | 1-14              
+  agent_mtn.entity.ts          |       0 |      100 |     100 |       0 | 1-13              
+  compte_mtn.entity.ts         |       0 |      100 |     100 |       0 | 1-10              
+  compte_uatm.entity.ts        |       0 |      100 |     100 |       0 | 1-13              
+  global_payment.entity.ts     |       0 |      100 |     100 |       0 | 1-27              
+  offre.entity.ts              |       0 |      100 |       0 |       0 | 1-19              
+  payment_list.entity.ts       |       0 |      100 |       0 |       0 | 1-32              
+  student.entity.ts            |       0 |      100 |       0 |       0 | 1-26              
+ src/global_payment            |       0 |        0 |       0 |       0 |                   
+  global_payment.controller.ts |       0 |      100 |       0 |       0 | 1-25              
+  global_payment.module.ts     |       0 |      100 |     100 |       0 | 1-18              
+  global_payment.service.ts    |       0 |        0 |       0 |       0 | 1-62              
+ src/payment_list              |       0 |        0 |       0 |       0 |                   
+  payment_list.controller.ts   |       0 |      100 |       0 |       0 | 1-25              
+  payment_list.module.ts       |       0 |      100 |     100 |       0 | 1-12              
+  payment_list.service.ts      |       0 |        0 |       0 |       0 | 1-99              
+ src/ressources                |       0 |        0 |       0 |       0 |                   
+  ressources.controller.ts     |       0 |      100 |       0 |       0 | 1-50              
+  ressources.module.ts         |       0 |      100 |     100 |       0 | 1-14              
+  ressources.service.ts        |       0 |        0 |       0 |       0 | 1-61              
+ src/upload                    |   47.05 |      100 |       0 |   46.15 |                   
+  upload.controller.ts         |   66.66 |      100 |       0 |      60 | 13-15,21          
+  upload.module.ts             |       0 |      100 |     100 |       0 | 1-7               
+ src/users                     |       0 |        0 |       0 |       0 |                   
+  users.controller.ts          |       0 |      100 |       0 |       0 | 2-40              
+  users.module.ts              |       0 |      100 |     100 |       0 | 1-13              
+  users.service.ts             |       0 |        0 |       0 |       0 | 2-82              
+-------------------------------|---------|----------|---------|---------|-------------------
+Test Suites: 8 failed, 3 passed, 11 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        39.213 s
